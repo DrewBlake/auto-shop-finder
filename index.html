@@ -3,23 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>AutoShopSearchApp</title>
+    <title>AutoShopFinder</title>
     
-  <link href="index.css" rel="stylesheet" type="text/css" />
+    <link href="index.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <main role="main">
-      <h1>Get your location</h1>
-      <button type="submit" class="js-location">Search</button>
-      <div class="js-show-result"></div>
-      <div id="lat"></div>
-      <div id="long"></div>
-      <div id="failure"></div>
-
+      <section role="region">
+        <h1>Auto Shop Finder</h1>
+        <button type="submit" class="js-location-near-me">Search close to your location</button>
+        <button type="submit" class="js-location-anywhere">Search any location</button>
+        <div class="js-show-result"></div>
+        <div id="lat"></div>
+        <div id="long"></div>
+        <div id="failure"></div>
+        <div id="userForm"></div>
+        <div id="map"></div>
+      </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
-    
     <script src="index.js"></script>
+    
+    
+    
   </body>
 </html>

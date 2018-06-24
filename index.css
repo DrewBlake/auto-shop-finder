@@ -1,0 +1,49 @@
+* {
+	box-sizing: border-box;
+	font-family: sans-serif;
+	color: white;
+}
+
+html {
+   
+
+  background: url(https://cdn.pixabay.com/photo/2014/07/21/15/21/arizona-398686_960_720.jpg) 
+  no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;  
+  min-height: 100%;
+  height: 100%;
+
+}
+
+main {
+	background-color: rgba(18, 17, 16, 0.8);
+	width: 50%;
+	margin: 90px auto;
+	border-radius: 7px;
+}
+
+button, input {
+	color: black;
+	height: 40px;
+	border-radius: 5px;
+	font-weight: 600;
+
+}
+
+input {
+	padding: 10px;
+}
+
+h1 {
+	font-size: 2.3em;
+}
+
+section {
+	margin-left: 20%;
+	padding-top: 40px;
+	padding-bottom: 60px;
+
+}
