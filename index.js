@@ -1,38 +1,65 @@
-// Initialize and add the map
-/*function initMap() {
-  // The location of Uluru
-  var uluru = {lat: 33.6220542, lng: -84.36909179999999};
-  // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
-}*/
+let map;
+let infowindow;
+const WEATHER_SEARCH_URL = 'https://api.openweathermap.org/data/2.5/find';
 
-const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
+function initMap() {
+  let local = {lat: 33.608, lng: -84.361};
 
-function getDataFromApi(callback) {
-  const query = {
-    location: '33.62,-84.36',
-    rankby: 'distance',
-    type: 'car_repair',
-    key: 'AIzaSyDXM1Agyu1TixKQJWNTzvwf-ITCGijsuBk'
-    
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: local,
+    zoom: 15
+  });
+
+  infowindow = new google.maps.InfoWindow();
+
+   let request = {
+    location: local,
+    radius: '500',
+    query: 'car shop'
+  };
+
+  service = new google.maps.places.PlacesService(map);
+  service.textSearch(request, callback);
+}
+
+function callback(results, status) {
+  if (status === google.maps.places.PlacesServiceStatus.OK) {
+    let shopList = '';
+    for (let i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+      shopList += `<li>${results[i].name} ${results[i].formatted_address}</li>`;
+    }
+    $('.js-list-items').html(shopList);
   }
-  $.getJSON(GOOGLE_PLACES_URL, query, callback);
 }
 
+function createMarker(place) {
+  let placeLoc = place.geometry.location;
+  let marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+  });
 
-
-function renderResult(result) {
-  return `<p>${result.name}</p>`;
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.setContent(`<h3>${place.name}</h3><h4>${place.formatted_address}</h4>`);
+    //infowindow.setContent(place.formatted_address);
+    infowindow.open(map, this);
+  });
 }
 
-function displayNearByData(data) {
-  const results = data.results.map((item, index) => renderResult(item));
-  $('.js-show-result').html(results);
-  console.log('hello1');
+function getDataFromWeatherApi(callback2) {
+  const query = {
+    q: 'Atlanta',
+    units: 'imperial',
+    appid: '0c71fc03b2b136bb5a5a20de50504d84',   
+  }
+  $.getJSON(WEATHER_SEARCH_URL, query, callback2);
+}
 
+function displayWeatherData (data) {
+  const results = [`${data.list[0].main.temp} degrees F, and ${data.list[0].main.humidity} % humidity`];
+  console.log(results);
+  $('.js-weather-list').html(results);
 }
 
 function renderForm() {
@@ -58,56 +85,48 @@ function displayForm() {
     // clear out the input
     $("#userInput").html(`<p>The location you entered is ${query}</p>`);
     queryTarget.val("");
+    //$('.home-screen').hide();   
  });
 }
 
 function getLocation() {
-    
-        /*navigator.geolocation.getCurrentPosition(function(position){
-          $(".js-show-result").html("latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
-          console.log(position.coords.latitude);
-        });*/
         if (navigator.geolocation) {
-          console.log('geolocation');
-        
-          console.log('hello');
-          let x = navigator.geolocation;
-          console.log(x);
-          
+          $('.loading').show();
+          const x = navigator.geolocation;
           x.getCurrentPosition(success, failure);
 
           function success(position) {
+            
             let myLat = position.coords.latitude;
             let myLong = position.coords.longitude;
-            $("#lat").html(`<p>Your Latitude is ${myLat}</p>`);
-            $("#long").html(`<p>Your Longitude is ${myLong}</p>`);
+            
+            //$("#lat").html(`<p>Your Latitude is ${myLat}</p>`);
+            //$("#lat").show();
+            //$("#long").html(`<p>Your Longitude is ${myLong}</p>`);
+            //$("#long").show();
             console.log('goodjob');
-            
-          }
+            $('.loading').hide();
+            $("#failure").hide();          
+          };
 
-          function failure() {
-            
+          function failure() {     
             $("#failure").html('<p>Cannot show your location unless you choose allow</p>');
-            
-          }
-        } else {
-          
+            $("#failure").show();
+            $('.loading').hide();
+          };
+        } else {         
           $("#failure").html('<p>Geolocation is not supported by Your browser</p>');
-        }
+        };
         
 }
-/*function showPosition(position) {
-    $('.js-show-result').html(`<p>Latitude:
-    <br>Longitude: </p>`);
-    //console.log(`${position.coords.latitude}`); 
-}
-*/
 
 function handleAnywhereButtonClick() {
   $('.js-location-anywhere').on('click', function(event) {
     //$("#lat").remove();
     //$("#long").remove();
-    //$("failure").remove();
+    //$("#failure").hide();
+    //$("#long").hide();
+    //$("#lat").hide();
     displayForm();
     handleSearchButtonClick();
   });
@@ -115,22 +134,35 @@ function handleAnywhereButtonClick() {
 
 function handleLocationButtonClick() {
   $('.js-location-near-me').on('click', function(event) {
-    //$("#long").remove();
+    $("#long").hide();
+    $("#lat").hide();
     getLocation();
+    //$('.loading').hide();
+    //$('.home-screen').hide();
     //getDataFromApi(displayNearByData);
   });
 }
 
+
+
+
+
 function runApp() {
-  //success();
-  //initMap();
+  $('.user-input').hide();
+  //$('main').hide();
+  //$("#map").hide();
+  $('.loading').hide('fast');
+  getDataFromWeatherApi(displayWeatherData);
   handleLocationButtonClick();
+  //$("#map").show();
   handleAnywhereButtonClick();
+  //initMap();
+  //createMarker();
   //showPosition();
   //handleLocationButtonClick();
 }
 
 $(runApp);
 
-//$(getLocation);
+
 

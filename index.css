@@ -1,31 +1,34 @@
 * {
 	box-sizing: border-box;
 	font-family: sans-serif;
-	color: white;
+	
 }
 
-html {
+main {
    
-
-  background: url(https://cdn.pixabay.com/photo/2014/07/21/15/21/arizona-398686_960_720.jpg) 
+	
+ /* background: url(https://cdn.pixabay.com/photo/2014/07/21/15/21/arizona-398686_960_720.jpg) 
   no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;  
-  min-height: 100%;
-  height: 100%;
+  min-height: 100%;*/
+  height: 100%; 
+
 
 }
 
-main {
+.user-input {
 	background-color: rgba(18, 17, 16, 0.8);
 	width: 50%;
-	margin: 90px auto;
-	border-radius: 7px;
+	margin: 60px auto;
+	border-radius: 9px;
+	padding: 30px;
 }
 
 button, input {
+	font-size: 15px;
 	color: black;
 	height: 40px;
 	border-radius: 5px;
@@ -38,12 +41,17 @@ input {
 }
 
 h1 {
-	font-size: 2.3em;
+	font-size: 2.7em;
 }
 
-section {
-	margin-left: 20%;
-	padding-top: 40px;
-	padding-bottom: 60px;
 
+#map {
+  height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /*background-color: rgba(63, 127, 191, 0.6);*/
 }
