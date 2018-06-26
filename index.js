@@ -1,13 +1,17 @@
 let map;
 let infowindow;
 const WEATHER_SEARCH_URL = 'https://api.openweathermap.org/data/2.5/find';
+let myLat;
+let myLong;
+let weatherLat;
+let weatherLong;
 
 function initMap() {
   let local = {lat: 33.608, lng: -84.361};
 
   map = new google.maps.Map(document.getElementById('map'), {
     center: local,
-    zoom: 15
+    zoom: 12.5
   });
 
   infowindow = new google.maps.InfoWindow();
@@ -15,14 +19,30 @@ function initMap() {
    let request = {
     location: local,
     radius: '500',
-    query: 'car shop'
+    query: 'car repair shop'
   };
 
   service = new google.maps.places.PlacesService(map);
-  service.textSearch(request, callback);
+  service.textSearch(request, displayMarkers);
+  //updateMapInfo();
+
 }
 
-function callback(results, status) {
+/*setTimeout(function(){
+  updateMapInfo();
+}, 6000)*/
+
+function updateMapInfo() {
+  map.setCenter({lat: myLat, lng: myLong});   
+}
+
+function updateMapInfoCity() {
+  console.log(weatherLat);
+  console.log(weatherLong);
+  map.setCenter({lat: weatherLat, lng: weatherLong});
+}
+
+function displayMarkers(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     let shopList = '';
     for (let i = 0; i < results.length; i++) {
@@ -47,19 +67,25 @@ function createMarker(place) {
   });
 }
 
-function getDataFromWeatherApi(callback2) {
+
+function getDataFromWeatherApi(userInput, callback) {
   const query = {
-    q: 'Atlanta',
+    q: userInput,
     units: 'imperial',
     appid: '0c71fc03b2b136bb5a5a20de50504d84',   
   }
-  $.getJSON(WEATHER_SEARCH_URL, query, callback2);
+  $.getJSON(WEATHER_SEARCH_URL, query, callback);
 }
 
 function displayWeatherData (data) {
   const results = [`${data.list[0].main.temp} degrees F, and ${data.list[0].main.humidity} % humidity`];
   console.log(results);
   $('.js-weather-list').html(results);
+  weatherLong = data.list[0].coord.lon;
+  weatherLat = data.list[0].coord.lat;
+  updateMapInfoCity()
+  console.log(weatherLat);
+  console.log(weatherLong);
 }
 
 function renderForm() {
@@ -85,6 +111,9 @@ function displayForm() {
     // clear out the input
     $("#userInput").html(`<p>The location you entered is ${query}</p>`);
     queryTarget.val("");
+    getDataFromWeatherApi(query, displayWeatherData);
+    //updateMapInfoCity();
+    //getDataFromWeatherApi(query, displayWeatherData);
     //$('.home-screen').hide();   
  });
 }
@@ -97,13 +126,14 @@ function getLocation() {
 
           function success(position) {
             
-            let myLat = position.coords.latitude;
-            let myLong = position.coords.longitude;
-            
+            myLat = position.coords.latitude;
+            myLong = position.coords.longitude;
+            //map.setCenter(lat: myLat, lng: myLong);
             //$("#lat").html(`<p>Your Latitude is ${myLat}</p>`);
             //$("#lat").show();
             //$("#long").html(`<p>Your Longitude is ${myLong}</p>`);
             //$("#long").show();
+
             console.log('goodjob');
             $('.loading').hide();
             $("#failure").hide();          
@@ -137,6 +167,7 @@ function handleLocationButtonClick() {
     $("#long").hide();
     $("#lat").hide();
     getLocation();
+    updateMapInfo();
     //$('.loading').hide();
     //$('.home-screen').hide();
     //getDataFromApi(displayNearByData);
@@ -148,14 +179,16 @@ function handleLocationButtonClick() {
 
 
 function runApp() {
-  $('.user-input').hide();
+  //$('.user-input').hide();
   //$('main').hide();
   //$("#map").hide();
   $('.loading').hide('fast');
-  getDataFromWeatherApi(displayWeatherData);
+  
+  
   handleLocationButtonClick();
   //$("#map").show();
   handleAnywhereButtonClick();
+  //updateMapInfo();
   //initMap();
   //createMarker();
   //showPosition();
