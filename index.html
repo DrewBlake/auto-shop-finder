@@ -43,19 +43,21 @@
     <link href="index.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+
     <main role='main'>
-      <section role='region' class='user-input'>
-        <h1 role="banner">Auto Shop Finder</h1>
-        <button type="submit" class="js-location-near-me">Search close to your location</button>
-        <button type="submit" class="js-location-anywhere">Search any location</button>
-      
-        <div class="js-show-result"></div>
-        <div id="lat"></div>
-        <div id="long"></div>
-        <div id="failure"></div>
-        <div id="userForm"></div>
-        <div class='loading'>Loading info...</div>
-      </section>
+      <div class='user-input'>
+        <section role='region'>
+          <h1 role="banner">Auto Shop Finder</h1>
+          <button type="submit" class="js-location-near-me">Search close to your location</button>
+          <button type="submit" class="js-location-anywhere">Search any location</button>
+        
+          <div class="js-show-result"></div>
+          
+          
+          <div id="userForm"></div>
+          <div class='loading'>Loading info...</div>
+        </section>
+      </div>
         <!--<button type="submit" class="js-location-near-me">Search close to your location</button>
         <button type="submit" class="js-location-anywhere">Search any location</button>
         <div id="userForm"></div>-->
@@ -65,6 +67,9 @@
       <div class="shop-info">
         <ul class="js-list-items"></ul>
       </div>
+      <div class="js-error"></div>
+      <div id="failure"></div>
+      <button class="js-back">Search again</button>
     </main>
     
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

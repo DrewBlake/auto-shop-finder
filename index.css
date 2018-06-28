@@ -7,7 +7,7 @@
 main {
    
 	
- /* background: url(https://cdn.pixabay.com/photo/2014/07/21/15/21/arizona-398686_960_720.jpg) 
+  /*background: url(https://cdn.pixabay.com/photo/2014/07/21/15/21/arizona-398686_960_720.jpg) 
   no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -20,11 +20,14 @@ main {
 }
 
 .user-input {
+	
+
 	background-color: rgba(18, 17, 16, 0.8);
 	width: 50%;
-	margin: 60px auto;
+	margin: 100px auto;
 	border-radius: 9px;
-	padding: 30px;
+	padding: 40px;
+	padding-top: 0.5px;
 }
 
 button, input {
@@ -41,7 +44,7 @@ input {
 }
 
 h1 {
-	font-size: 2.7em;
+	font-size: 40px;
 }
 
 
@@ -53,5 +56,24 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  /*background-color: rgba(63, 127, 191, 0.6);*/
+  /*background-color: rgba(63, 127, 191, 0.1);*/
+}
+
+.list-item {
+	border: 1px solid rgb(183, 26, 5);
+	margin: 5px 0;
+	padding: 5px;
+	text-align: center;
+	list-style: none;
+	border-radius: 5px;
+}
+
+.weather-info {
+	text-align: center;
+	width: 50%;
+	border: 1.5px solid rgb(26, 5, 183);
+	margin: 10px auto;
+	padding: 15px;
+	border-radius: 5px;
+
 }
