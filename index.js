@@ -102,6 +102,7 @@ function getDataFromWeatherApi(lat1, long1, userInput, callback) {
 }
 
 function tryAgain() {
+  $(".js-background").show();
   $(".js-error").html(`No data for this location.  Please search again.`);
   $(".js-error").show();
   $(".js-back").show();
@@ -151,6 +152,7 @@ function handleSearchButtonClick() {
     // clear out the input
     //$("#userInput").html(`<p>The location you entered is ${query}</p>`);
     queryTarget.val("");
+    $(".js-background").hide();
     $(".user-input").hide();
     
     getDataFromWeatherApi('','',query, displayWeatherData);
@@ -197,6 +199,7 @@ function getLocation() {
             $("#failure").show();
             $('.loading').hide();
             $(".js-back").show();
+            $(".js-background").show();
           };
         } else {         
           $("#failure").html('<p>Geolocation is not supported by Your browser</p>');
@@ -224,7 +227,7 @@ function handleLocationButtonClick() {
   $('.js-location-near-me').on('click', function(event) {
     
     $(".user-input").hide();
-    
+    $(".js-background").hide();
     getLocation();
     //$(".js-list-items").show();
     //$(".js-weather-list").show();
@@ -242,11 +245,12 @@ function handleBackButtonClick() {
     $(".js-list-items").hide();
     $(".js-weather-list").hide();
     $("#map").hide();
-    $(".user-input").show();
     $(".js-back").hide();
     $(".js-search-form").hide();
     $(".js-error").hide();
     $("#failure").hide();
+    $(".js-background").show();
+    $(".user-input").show();
   });
 }
 
