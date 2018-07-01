@@ -1,49 +1,222 @@
 * {
 	box-sizing: border-box;
 	font-family: sans-serif;
-	color: white;
 }
 
-html {
-   
+main {
+  height: 100%; 
+  background-color: rgba(236, 246, 248, 0.8);
+}
 
-  background: url(https://images.pexels.com/photos/190537/pexels-photo-190537.jpeg?auto=compress&cs=tinysrgb&h=350) 
+.background {
+  background: url(https://images.pexels.com/photos/414579/pexels-photo-414579.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) 
   no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;  
   min-height: 100%;
-  height: 100%;
-
+  height: 100%; 
+  margin: 0;
+  padding: 0;
 }
 
-main {
+h1 {
+	font-size: 30px;
+}
+
+.user-input {
+	color: white;
+	position: fixed;
+	top: 60px;
+	left: 10%;
 	background-color: rgba(18, 17, 16, 0.8);
-	width: 50%;
-	margin: 90px auto;
-	border-radius: 7px;
+	width: 80%;
+	border-radius: 9px;
+	padding: 40px;
+	padding-top: 0.5px;
 }
 
 button, input {
+	font-size: 15px;
 	color: black;
+	width: 170px;
 	height: 40px;
 	border-radius: 5px;
 	font-weight: 600;
+	margin: 5px;
+}
 
+button:hover {
+	color: white;
+	background-color: rgba(11, 13, 12, 0.8);
+}
+
+.search-again {
+	width: 50%;
+	margin: 40px auto;
+	text-align: center;
+}
+
+.error, #failure {
+	position: fixed;
+	bottom: 400px;
+	font-size: 1.8em;
+	border-radius: 7px;
+	text-align: center;
+	width: 80%;
+	left: 10%;
+	color: white;
+	background-color: rgba(18, 17, 16, 0.8);
+}
+
+.try-again {
+	position: fixed;
+	width: 50%;
+	left: 25%;
+	bottom: 190px;		
+}
+
+.fail-button, .back-button {
+	color: white;
+	background-color: rgba(18, 17, 16);
+	height: 70px;
+	width: 150px;
+	font-size: 20px;
+}
+
+#waiting-icon {
+	position: fixed;
+	bottom: 130px;
+	left: 25%;
+	border-radius: 20px;
+	height: 190px;
+	width: 55%;
 }
 
 input {
 	padding: 10px;
 }
 
-h1 {
-	font-size: 2.3em;
+#map {
+  height: 100%;
 }
 
-section {
-	margin-left: 20%;
-	padding-top: 40px;
-	padding-bottom: 60px;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(236, 246, 248, 0.8);
+}
 
+.list-item {
+	font-weight: 600;
+	border: 1px solid rgb(183, 26, 5);
+	margin: 15px 0;
+	margin-right: 30px;
+	padding: 5px;
+	text-align: center;
+	list-style: none;
+	border-radius: 5px;
+}
+
+.shop-info {
+	margin-top: -40px;
+}
+
+.weather-info {
+	font-weight: 600;
+	position: relative;
+	bottom: 40em;
+	left: 45%;
+	background-color: rgba(236, 246, 248, 0.8);
+	text-align: center;
+	width: 50%;
+	padding: 15px;
+	border-radius: 5px;
+}
+
+@media only screen and (min-width: 480px) {
+  h1 { 
+  	font-size: 40px;
+  }
+
+  .error, #failure{
+		font-size: 2em;
+	}
+
+  .user-input {
+  	width: 70%;
+  	left: 15%;
+  }
+
+  .weather-info {
+	font-size: 20px;
+	bottom: 32em;
+  }
+
+  .try-again {
+  	left: 35%;
+  }
+
+  #waiting-icon {
+  	width: 40%;
+  	bottom: 90px;
+  	left: 30%;
+  }
+
+  button, input {
+  	font-size: 20px;
+  	width: 265px;
+  	height: 50px;
+  }
+
+@media only screen and (min-width: 900px) {
+	h1 {
+		font-size: 45px;
+	}
+
+	.user-input {
+		width: 70%;
+	}
+
+	.error, #failure{
+		font-size: 2.4em;
+	}
+
+	button, input {
+		font-size: 20px;
+		margin-left: 15px;
+		height: 70px;
+	}
+
+	.anywhere-button {
+		position: absolute;
+		top: 126px;
+	}
+
+	h2 {
+		font-size: 25px;
+	}
+
+	.try-again {
+		left: 40%;
+	}
+
+	#waiting-icon {
+  	width: 30%;
+  	bottom: 90px;
+  	left: 35%;
+  }
+
+  .list-item {
+  	font-size: 20px;
+  }
+
+}
+
+@media only screen and (min-width: 1130px) {
+	.user-input {
+		width: 50%;
+	}
 }

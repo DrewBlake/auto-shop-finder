@@ -1,45 +1,114 @@
-// Initialize and add the map
-/*function initMap() {
-  // The location of Uluru
-  var uluru = {lat: 33.6220542, lng: -84.36909179999999};
-  // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
-}*/
+let map;
+let infowindow;
+const WEATHER_SEARCH_URL = 'https://api.openweathermap.org/data/2.5/find';
+let myLat;
+let myLong;
+let weatherLat;
+let weatherLong;
+$(".js-waiting-icon").show();
 
-const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
+function initMap() {
+  let local = {lat: 33.608, lng: -84.361};
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: local,
+    zoom: 12.5
+  });
+}
 
-function getDataFromApi(callback) {
-  const query = {
-    location: '33.62,-84.36',
-    rankby: 'distance',
-    type: 'car_repair',
-    key: 'AIzaSyDXM1Agyu1TixKQJWNTzvwf-ITCGijsuBk'
-    
+function updateMapInfo() {
+  map.setCenter({lat: myLat, lng: myLong}); 
+  infowindow = new google.maps.InfoWindow();
+
+   let request = {
+    location: {lat: myLat, lng: myLong},
+    radius: '500',
+    query: 'car repair shop'
+  };
+
+  service = new google.maps.places.PlacesService(map);
+  service.textSearch(request, displayMarkers);
+}
+
+function updateMapInfoCity() {
+  map.setCenter({lat: weatherLat, lng: weatherLong});
+  infowindow = new google.maps.InfoWindow();
+
+   let request = {
+    location: {lat: weatherLat, lng: weatherLong},
+    radius: '500',
+    query: 'car repair shop'
+  };
+
+  service = new google.maps.places.PlacesService(map);
+  service.textSearch(request, displayMarkers);
+}
+
+function displayMarkers(results, status) {
+  if (status === google.maps.places.PlacesServiceStatus.OK) {
+    let shopList = '';
+    for (let i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+      shopList += `<li class="list-item">${results[i].name} ${results[i].formatted_address}</li>`;
+    }
+    $(".js-waiting-icon").hide();
+    $('.js-list-items').html(shopList);
   }
-  $.getJSON(GOOGLE_PLACES_URL, query, callback);
 }
 
+function createMarker(place) {
+  let placeLoc = place.geometry.location;
+  let marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+  });
 
-
-function renderResult(result) {
-  return `<p>${result.name}</p>`;
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.setContent(`<h3>${place.name}</h3><h4>${place.formatted_address}</h4>`);
+    infowindow.open(map, this);
+  });
 }
 
-function displayNearByData(data) {
-  const results = data.results.map((item, index) => renderResult(item));
-  $('.js-show-result').html(results);
-  console.log('hello1');
+function getDataFromWeatherApi(lat1, long1, userInput, callback) {
+  const query = {
+    lat: lat1,
+    lon: long1,
+    q: userInput,
+    units: 'imperial',
+    appid: '0c71fc03b2b136bb5a5a20de50504d84',   
+  }
+  $.getJSON(WEATHER_SEARCH_URL, query, callback);
+}
 
+function tryAgain() {
+  $(".js-waiting-icon").hide();
+  $(".js-background").show();
+  $(".js-search-form").hide();
+  $(".js-error").html(`No data for this location.  Please search again.`);
+  $(".js-error").show();
+  $(".js-fail-button").show();
+}
+
+function displayWeatherData(data) {
+  if (data.count > 0) {
+    const results = [`<div class="weather-info">${data.list[0].main.temp} degrees F and ${data.list[0].main.humidity}% humidity</div>`];
+    weatherLong = data.list[0].coord.lon;
+    weatherLat = data.list[0].coord.lat;
+    updateMapInfoCity();
+    $("#map").show();
+    $(".js-list-items").show();
+    $(".js-weather-list").show();
+    $(".js-back").show();
+    $('.js-weather-list').html(results);
+  } else {
+    tryAgain();
+  };
 }
 
 function renderForm() {
   return `
       <form action="#" class="js-search-form">
         <label for="query"><h2>Enter a city or zip code</h2></label>
-        <input type="text" id="query" class="js-query" placeholder="Example: Atlanta or 30297" required>
+        <input type="text" id="query" class="js-query" placeholder="Exp: Atlanta or 30297" required>
         <button type="submit">Search</button>
       </form>
       <div id="userInput"></div>`;
@@ -49,88 +118,99 @@ function displayForm() {
   $("#userForm").html(renderForm);
 }
 
- function handleSearchButtonClick() {
+function handleSearchButtonClick() {
   $('.js-search-form').submit(event => {
     event.preventDefault();
     const queryTarget = $(event.currentTarget).find('.js-query');
     const query = queryTarget.val();
-    console.log(query);
-    // clear out the input
-    $("#userInput").html(`<p>The location you entered is ${query}</p>`);
     queryTarget.val("");
+    $(".js-waiting-icon").show();
+    $(".js-background").hide();
+    $(".user-input").hide();
+    
+    getDataFromWeatherApi('','',query, displayWeatherData);  
  });
 }
 
-function getLocation() {
-    
-        /*navigator.geolocation.getCurrentPosition(function(position){
-          $(".js-show-result").html("latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
-          console.log(position.coords.latitude);
-        });*/
-        if (navigator.geolocation) {
-          console.log('geolocation');
-        
-          console.log('hello');
-          let x = navigator.geolocation;
-          console.log(x);
-          
-          x.getCurrentPosition(success, failure);
+function getLocation() {      
+  if (navigator.geolocation) {
+    const x = navigator.geolocation;
+    x.getCurrentPosition(success, failure);
 
-          function success(position) {
-            let myLat = position.coords.latitude;
-            let myLong = position.coords.longitude;
-            $("#lat").html(`<p>Your Latitude is ${myLat}</p>`);
-            $("#long").html(`<p>Your Longitude is ${myLong}</p>`);
-            console.log('goodjob');
-            
-          }
+    function success(position) {  
+      $(".js-waiting-icon").show();  
+      myLat = position.coords.latitude;
+      myLong = position.coords.longitude;
+      
+      updateMapInfo();
+      getDataFromWeatherApi(myLat, myLong, '', displayWeatherData);
+      $(".js-background").hide();
+      $("#failure").hide();       
+    };
 
-          function failure() {
-            
-            $("#failure").html('<p>Cannot show your location unless you choose allow</p>');
-            
-          }
-        } else {
-          
-          $("#failure").html('<p>Geolocation is not supported by Your browser</p>');
-        }
-        
+    function failure() {     
+      $("#failure").html('Cannot show your location unless you choose allow');
+      $("#failure").show();
+      $(".js-waiting-icon").hide();
+      $(".js-fail-button").show();
+      $(".js-background").show();
+    };
+  } else {         
+    $("#failure").html('Geolocation is not supported by Your browser.  Search by location.');
+    $(".js-fail-button").show();
+  };       
 }
-/*function showPosition(position) {
-    $('.js-show-result').html(`<p>Latitude:
-    <br>Longitude: </p>`);
-    //console.log(`${position.coords.latitude}`); 
-}
-*/
 
 function handleAnywhereButtonClick() {
   $('.js-location-anywhere').on('click', function(event) {
-    //$("#lat").remove();
-    //$("#long").remove();
-    //$("failure").remove();
     displayForm();
     handleSearchButtonClick();
   });
 }
 
 function handleLocationButtonClick() {
-  $('.js-location-near-me').on('click', function(event) {
-    //$("#long").remove();
+  $('.js-location-near-me').on('click', function(event) { 
+    $(".user-input").hide();
     getLocation();
-    //getDataFromApi(displayNearByData);
   });
 }
 
-function runApp() {
-  //success();
-  //initMap();
-  handleLocationButtonClick();
-  handleAnywhereButtonClick();
-  //showPosition();
-  //handleLocationButtonClick();
+function handleFailButtonClick() {
+  $(".js-fail-button").on('click', function(event) {
+    $(".js-error").hide();
+    $(".js-fail-button").hide();
+    $("#failure").hide();
+    $(".user-input").show();
+    $(".js-search-form").hide();
+  });
 }
 
-$(runApp);
+function handleBackButtonClick() {
+  $(".js-back").on('click', function(event) {
+    $(".js-list-items").hide();
+    $(".js-weather-list").hide();
+    $("#map").hide();
+    $(".js-back").hide();
+    $(".js-search-form").hide();
+    $(".js-error").hide();
+    $("#failure").hide();
+    $(".js-background").show();
+    $(".user-input").show();
+  });
+}
 
-//$(getLocation);
+function shopFinderApp() {
+  $(".js-fail-button").hide();
+  $(".js-waiting-icon").hide();
+  $(".js-back").hide();
+  $("#map").hide();
+  handleFailButtonClick();
+  handleBackButtonClick();
+  handleLocationButtonClick();
+  handleAnywhereButtonClick();
+}
+
+$(shopFinderApp);
+
+
 
