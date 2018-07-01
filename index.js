@@ -75,6 +75,7 @@ function getDataFromWeatherApi(lat1, long1, userInput, callback) {
     lat: lat1,
     lon: long1,
     q: userInput,
+    type: 'like',
     units: 'imperial',
     appid: '0c71fc03b2b136bb5a5a20de50504d84',   
   }
