@@ -6,6 +6,7 @@ let myLong;
 let weatherLat;
 let weatherLong;
 $(".js-waiting-icon").show();
+$(".js-scroll").hide();
 
 function initMap() {
   let local = {lat: 33.608, lng: -84.361};
@@ -51,6 +52,7 @@ function displayMarkers(results, status) {
       shopList += `<li class="list-item">${results[i].name} ${results[i].formatted_address}</li>`;
     }
     $(".js-waiting-icon").hide();
+    $(".js-scroll").show();
     $('.js-list-items').html(shopList);
   }
 }
@@ -89,19 +91,26 @@ function tryAgain() {
 }
 
 function displayWeatherData(data) {
-  if (data.count > 0) {
-    const results = [`<div class="weather-info">${data.list[0].main.temp} degrees F and ${data.list[0].main.humidity}% humidity</div>`];
-    weatherLong = data.list[0].coord.lon;
-    weatherLat = data.list[0].coord.lat;
-    updateMapInfoCity();
-    $("#map").show();
-    $(".js-list-items").show();
-    $(".js-weather-list").show();
-    $(".js-back").show();
-    $('.js-weather-list').html(results);
-  } else {
-    tryAgain();
-  };
+  try {
+    if ((data.cod === "200") && (data.count > 0)) {
+      console.log(data.cod);
+      console.log(data.count);
+      const results = [`<div class="weather-info">${data.list[0].main.temp} degrees F and ${data.list[0].main.humidity}% humidity</div>`];
+      weatherLong = data.list[0].coord.lon;
+      weatherLat = data.list[0].coord.lat;
+      updateMapInfoCity();
+      $("#map").show();
+      $(".js-list-items").show();
+      $(".js-weather-list").show();
+      $(".js-back").show();
+      $('.js-weather-list').html(results);
+      } else {
+      tryAgain();
+      }
+    }
+    catch(error) {
+      console.error(error);
+    }
 }
 
 function renderForm() {
@@ -190,6 +199,7 @@ function handleBackButtonClick() {
     $(".js-list-items").hide();
     $(".js-weather-list").hide();
     $("#map").hide();
+    $(".js-scroll").hide();
     $(".js-back").hide();
     $(".js-search-form").hide();
     $(".js-error").hide();
@@ -200,6 +210,7 @@ function handleBackButtonClick() {
 }
 
 function shopFinderApp() {
+  //$(".js-scroll-msg").hide();
   $(".js-fail-button").hide();
   $(".js-waiting-icon").hide();
   $(".js-back").hide();

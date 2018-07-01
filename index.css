@@ -94,6 +94,20 @@ button:hover {
 	width: 55%;
 }
 
+/*.scroll-msg {
+	color: white;
+	position: relative;
+	font-size: 17px;
+	font-weight: 600;
+	/*bottom: 180%;
+	left: 40%;
+	background-color: rgba(18, 17, 16, 0.8);
+	border-radius: 10px;
+	width: 15%;
+	padding: 2px;
+	text-align: center;
+}*/
+
 input {
 	padding: 10px;
 }
@@ -121,7 +135,22 @@ html, body {
 }
 
 .shop-info {
-	margin-top: -40px;
+	margin-top: -80px;
+}
+
+#scroll {
+	font-size: 14px;
+	color: white;
+	position: relative;
+	width: 40%;
+	bottom: 90px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 10px;
+	background-color: rgba(18, 17, 16, 0.8);
+	text-align: center;
+	border-radius: 5px;
+	padding: 3px;
 }
 
 .weather-info {
