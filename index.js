@@ -92,25 +92,21 @@ function tryAgain() {
 }
 
 function displayWeatherData(data) {
-  try {
-    if ((data.cod === "200") && (data.count > 0)) {
-      console.log(data.cod);
-      console.log(data.count);
-      const results = [`<div class="weather-info">${data.list[0].main.temp} degrees F and ${data.list[0].main.humidity}% humidity</div>`];
-      weatherLong = data.list[0].coord.lon;
-      weatherLat = data.list[0].coord.lat;
-      updateMapInfoCity();
-      $("#map").show();
-      $(".js-list-items").show();
-      $(".js-weather-list").show();
-      $(".js-back").show();
-      $('.js-weather-list').html(results);
-      } else {
-      tryAgain();
-      }
-    }
-    catch(error) {
-      console.error(error);
+  
+  if ((data.cod === "200") && (data.count > 0)) {
+    console.log(data.cod);
+    console.log(data.count);
+    const results = [`<div class="weather-info">${data.list[0].main.temp} degrees F and ${data.list[0].main.humidity}% humidity</div>`];
+    weatherLong = data.list[0].coord.lon;
+    weatherLat = data.list[0].coord.lat;
+    updateMapInfoCity();
+    $("#map").show();
+    $(".js-list-items").show();
+    $(".js-weather-list").show();
+    $(".js-back").show();
+    $('.js-weather-list').html(results);
+  } else {
+    tryAgain();
     }
 }
 
@@ -133,12 +129,16 @@ function handleSearchButtonClick() {
     event.preventDefault();
     const queryTarget = $(event.currentTarget).find('.js-query');
     const query = queryTarget.val();
-    queryTarget.val("");
-    $(".js-waiting-icon").show();
-    $(".js-background").hide();
-    $(".user-input").hide();
-    
-    getDataFromWeatherApi('','',query, displayWeatherData);  
+    if (query.length < 3) {
+      $(".user-input").hide();
+      tryAgain();
+    } else {
+      queryTarget.val("");
+      $(".js-waiting-icon").show();
+      $(".js-background").hide();
+      $(".user-input").hide();
+      getDataFromWeatherApi('','',query, displayWeatherData);
+    }  
  });
 }
 
