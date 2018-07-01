@@ -94,20 +94,6 @@ button:hover {
 	width: 55%;
 }
 
-/*.scroll-msg {
-	color: white;
-	position: relative;
-	font-size: 17px;
-	font-weight: 600;
-	/*bottom: 180%;
-	left: 40%;
-	background-color: rgba(18, 17, 16, 0.8);
-	border-radius: 10px;
-	width: 15%;
-	padding: 2px;
-	text-align: center;
-}*/
-
 input {
 	padding: 10px;
 }
@@ -247,5 +233,11 @@ html, body {
 @media only screen and (min-width: 1130px) {
 	.user-input {
 		width: 50%;
+		left: 25%;
+	}
+
+	#waiting-icon {
+		width: 25%;
+		left: 40%;
 	}
 }

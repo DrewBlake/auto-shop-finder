@@ -5,8 +5,6 @@ let myLat;
 let myLong;
 let weatherLat;
 let weatherLong;
-$(".js-waiting-icon").show();
-$(".js-scroll").hide();
 
 function initMap() {
   let local = {lat: 33.608, lng: -84.361};
@@ -205,10 +203,12 @@ function handleBackButtonClick() {
 }
 
 function hideElementsOnStartup() {
+  $(".js-waiting-icon").show();
+  $(".js-scroll").hide();
   $(".js-fail-button").hide();
-  $(".js-waiting-icon").hide();
   $(".js-back").hide();
   $("#map").hide();
+  $(".js-waiting-icon").hide();
 }
 
 function shopFinderApp() {
