@@ -19,13 +19,11 @@ function initMap() {
 function updateMapInfo() {
   map.setCenter({lat: myLat, lng: myLong}); 
   infowindow = new google.maps.InfoWindow();
-
-   let request = {
+  let request = {
     location: {lat: myLat, lng: myLong},
     radius: '500',
     query: 'car repair shop'
   };
-
   service = new google.maps.places.PlacesService(map);
   service.textSearch(request, displayMarkers);
 }
@@ -33,13 +31,11 @@ function updateMapInfo() {
 function updateMapInfoCity() {
   map.setCenter({lat: weatherLat, lng: weatherLong});
   infowindow = new google.maps.InfoWindow();
-
-   let request = {
+  let request = {
     location: {lat: weatherLat, lng: weatherLong},
     radius: '500',
     query: 'car repair shop'
   };
-
   service = new google.maps.places.PlacesService(map);
   service.textSearch(request, displayMarkers);
 }
@@ -50,11 +46,11 @@ function displayMarkers(results, status) {
     for (let i = 0; i < results.length; i++) {
       createMarker(results[i]);
       shopList += `<li class="list-item">${results[i].name} ${results[i].formatted_address}</li>`;
-    }
+    };
     $(".js-waiting-icon").hide();
     $(".js-scroll").show();
     $('.js-list-items').html(shopList);
-  }
+  };
 }
 
 function createMarker(place) {
@@ -78,7 +74,7 @@ function getDataFromWeatherApi(lat1, long1, userInput, callback) {
     type: 'like',
     units: 'imperial',
     appid: '0c71fc03b2b136bb5a5a20de50504d84',   
-  }
+  };
   $.getJSON(WEATHER_SEARCH_URL, query, callback);
 }
 
@@ -92,7 +88,6 @@ function tryAgain() {
 }
 
 function displayWeatherData(data) {
-  
   if ((data.cod === "200") && (data.count > 0)) {
     console.log(data.cod);
     console.log(data.count);
@@ -107,7 +102,7 @@ function displayWeatherData(data) {
     $('.js-weather-list').html(results);
   } else {
     tryAgain();
-    }
+    };
 }
 
 function renderForm() {
@@ -138,7 +133,7 @@ function handleSearchButtonClick() {
       $(".js-background").hide();
       $(".user-input").hide();
       getDataFromWeatherApi('','',query, displayWeatherData);
-    }  
+    };  
  });
 }
 
@@ -151,7 +146,6 @@ function getLocation() {
       $(".js-waiting-icon").show();  
       myLat = position.coords.latitude;
       myLong = position.coords.longitude;
-      
       updateMapInfo();
       getDataFromWeatherApi(myLat, myLong, '', displayWeatherData);
       $(".js-background").hide();
@@ -210,12 +204,15 @@ function handleBackButtonClick() {
   });
 }
 
-function shopFinderApp() {
-  //$(".js-scroll-msg").hide();
+function hideElementsOnStartup() {
   $(".js-fail-button").hide();
   $(".js-waiting-icon").hide();
   $(".js-back").hide();
   $("#map").hide();
+}
+
+function shopFinderApp() {
+  hideElementsOnStartup();
   handleFailButtonClick();
   handleBackButtonClick();
   handleLocationButtonClick();
