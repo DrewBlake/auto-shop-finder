@@ -22,4 +22,4 @@ https://drewblake.github.io/auto-shop-finder/
 <img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Search_with_input.PNG?raw=true" />
 
 <p>Map display with location markers</p>
-<img src="
+<img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Map_with_markers.PNG?raw=true" />
