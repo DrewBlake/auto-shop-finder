@@ -16,4 +16,4 @@ https://drewblake.github.io/auto-shop-finder/
 
 <h2>Screen shots</h2>
 <p>Initial search page</p>
-<img src="C:\Users\ANDREW\Pictures\Initial_shop_finder_screen" />
+<img src="C:\Users\ANDREW\Pictures\Initial_shop_finder_screen.png" />
