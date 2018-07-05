@@ -15,8 +15,11 @@ https://drewblake.github.io/auto-shop-finder/
 </ul>
 
 <h2>Screen shots</h2>
-<p>Initial search page</p>
+<p>Initial search page:</p>
 <img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Initial_shop_finder_screen.PNG" />
 
-<p>Search page with input option</p>
+<p>Search page with input option:</p>
 <img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Search_with_input.PNG?raw=true" />
+
+<p>Map display with location markers</p>
+<img src="
