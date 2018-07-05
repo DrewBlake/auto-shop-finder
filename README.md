@@ -13,3 +13,7 @@ https://drewblake.github.io/auto-shop-finder/
   <li>CSS</li>
   <li>HTML</li>
 </ul>
+
+<h2>Screen shots</h2>
+<p>Initial search page</p>
+<img src="C:\Users\ANDREW\Pictures\Initial_shop_finder_screen" />
