@@ -17,3 +17,6 @@ https://drewblake.github.io/auto-shop-finder/
 <h2>Screen shots</h2>
 <p>Initial search page</p>
 <img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Initial_shop_finder_screen.PNG" />
+
+<p>Search page with input option</p>
+<img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Search_with_input.PNG?raw=true" />
