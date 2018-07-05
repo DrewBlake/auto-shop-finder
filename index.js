@@ -130,6 +130,7 @@ function handleSearchButtonClick() {
       $(".js-waiting-icon").show();
       $(".js-background").hide();
       $(".user-input").hide();
+      $('#copyright').hide();
       getDataFromWeatherApi('','',query, displayWeatherData);
     };  
  });
@@ -173,6 +174,7 @@ function handleAnywhereButtonClick() {
 function handleLocationButtonClick() {
   $('.js-location-near-me').on('click', function(event) { 
     $(".user-input").hide();
+    $("#copyright").hide();
     getLocation();
   });
 }
@@ -182,6 +184,7 @@ function handleFailButtonClick() {
     $(".js-error").hide();
     $(".js-fail-button").hide();
     $("#failure").hide();
+    $("#copyright").show();
     $(".user-input").show();
     $(".js-search-form").hide();
   });
@@ -197,6 +200,7 @@ function handleBackButtonClick() {
     $(".js-search-form").hide();
     $(".js-error").hide();
     $("#failure").hide();
+    $("#copyright").show();
     $(".js-background").show();
     $(".user-input").show();
   });
