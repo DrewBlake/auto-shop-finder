@@ -25,4 +25,4 @@ https://drewblake.github.io/auto-shop-finder/
 <img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Map_with_markers.PNG?raw=true" />
 
 <p>List of shops (show under map display):</p>
-<img src="
+<img src="auto-shop-finder/Shop_list.PNG"</p>
