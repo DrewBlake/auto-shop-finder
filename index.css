@@ -5,10 +5,9 @@
 
 main {
   height: 100%; 
-  background-color: rgba(236, 246, 248, 0.8);
 }
 
-.background {
+body {
   background: url(https://images.pexels.com/photos/414579/pexels-photo-414579.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) 
   no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -22,12 +21,16 @@ main {
 }
 
 h1 {
-	font-size: 30px;
+	font-size: 20px;
+}
+
+h2 {
+	font-size: 17px;
 }
 
 .user-input {
 	color: white;
-	position: fixed;
+	position: absolute;
 	top: 60px;
 	left: 10%;
 	background-color: rgba(18, 17, 16, 0.8);
@@ -35,6 +38,7 @@ h1 {
 	border-radius: 9px;
 	padding: 40px;
 	padding-top: 0.5px;
+	text-align: center;
 }
 
 button, input {
@@ -56,6 +60,10 @@ button:hover {
 	width: 50%;
 	margin: 40px auto;
 	text-align: center;
+}
+
+.js-list-items {
+	margin-top: 60px;
 }
 
 .error, #failure {
@@ -82,7 +90,7 @@ button:hover {
 	background-color: rgba(18, 17, 16);
 	height: 70px;
 	width: 150px;
-	font-size: 20px;
+	font-size: 15px;
 }
 
 #waiting-icon {
@@ -106,7 +114,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: rgba(236, 246, 248, 0.8);
+  /*background-color: rgba(236, 246, 248, 0.8);*/
 }
 
 .list-item {
@@ -118,6 +126,7 @@ html, body {
 	text-align: center;
 	list-style: none;
 	border-radius: 5px;
+	background-color: rgb(236, 246, 248);
 }
 
 .shop-info {
@@ -141,8 +150,9 @@ html, body {
 
 .weather-info {
 	font-weight: 600;
-	position: relative;
-	bottom: 40em;
+	position: absolute;
+	display: inline-table;
+	top: 10%;
 	left: 45%;
 	background-color: rgba(236, 246, 248, 0.8);
 	text-align: center;
@@ -151,9 +161,20 @@ html, body {
 	border-radius: 5px;
 }
 
+#copyright {
+	color: white;
+	background-color: rgb(18, 17, 16);
+	font-size: 12px;
+	position: absolute;
+	display: inline-table;
+	top: 530px;
+	right: 5px;
+	padding: 4px;
+}
+
 @media only screen and (min-width: 480px) {
   h1 { 
-  	font-size: 40px;
+  	font-size: 25px;
   }
 
   .error, #failure{
@@ -181,14 +202,22 @@ html, body {
   }
 
   button, input {
-  	font-size: 20px;
+  	font-size: 15px;
   	width: 265px;
   	height: 50px;
+  }
+
+  #copyright {
+  	top: 620px;
   }
 
 @media only screen and (min-width: 900px) {
 	h1 {
 		font-size: 45px;
+	}
+
+	p {
+		font-size: 20px;
 	}
 
 	.user-input {
@@ -201,13 +230,13 @@ html, body {
 
 	button, input {
 		font-size: 20px;
-		margin-left: 15px;
+		margin-left: 20px;
 		height: 70px;
 	}
 
 	.anywhere-button {
-		position: absolute;
-		top: 126px;
+		position: relative;
+		top: 12px;
 	}
 
 	h2 {
@@ -232,12 +261,13 @@ html, body {
 
 @media only screen and (min-width: 1130px) {
 	.user-input {
-		width: 50%;
-		left: 25%;
+		width: 70%;
+		left: 15%;
 	}
 
 	#waiting-icon {
 		width: 25%;
 		left: 40%;
 	}
+	
 }
