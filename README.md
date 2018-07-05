@@ -24,5 +24,5 @@ https://drewblake.github.io/auto-shop-finder/
 <p>Map display with location markers and weather display:</p>
 <img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Map_with_markers.PNG?raw=true" />
 
-<p>List of shops (show under map display):</p>
+<p>List of shops (shows underneath map display):</p>
 <img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Shop_list.PNG?raw=true" />
