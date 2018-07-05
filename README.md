@@ -21,5 +21,5 @@ https://drewblake.github.io/auto-shop-finder/
 <p>Search page with input option:</p>
 <img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Search_with_input.PNG?raw=true" />
 
-<p>Map display with location markers</p>
+<p>Map display with location markers and weather display</p>
 <img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Map_with_markers.PNG?raw=true" />
