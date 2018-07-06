@@ -14,6 +14,9 @@ function initMap() {
   });
 }
 
+//This function updates the map using GPS coordinates obtained from 
+//html geolocation API.
+
 function updateMapInfo() {
   map.setCenter({lat: myLat, lng: myLong}); 
   infowindow = new google.maps.InfoWindow();
@@ -25,6 +28,9 @@ function updateMapInfo() {
   service = new google.maps.places.PlacesService(map);
   service.textSearch(request, displayMarkers);
 }
+
+//This function updates the map using GPS coordinates obtained from 
+//weather API.  When the user inputs a city or zip code 
 
 function updateMapInfoCity() {
   map.setCenter({lat: weatherLat, lng: weatherLong});

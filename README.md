@@ -16,13 +16,13 @@ https://drewblake.github.io/auto-shop-finder/
 
 <h2>Screen shots</h2>
 <p>Initial search page:</p>
-<img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Initial_shop_finder_screen.PNG" />
+<img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/screen_shots/Initial_shop_finder_screen.PNG" />
 
 <p>Search page with input option:</p>
-<img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Search_with_input.PNG?raw=true" />
+<img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/screen_shots/Search_with_input.PNG?raw=true" />
 
 <p>Map display with location markers and weather display:</p>
-<img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Map_with_markers.PNG?raw=true" />
+<img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/screen_shots/Map_with_markers.PNG?raw=true" />
 
 <p>List of shops (shows underneath map display):</p>
-<img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/Shop_list.PNG?raw=true" />
+<img src="https://github.com/DrewBlake/auto-shop-finder/blob/master/screen_shots/Shop_list.PNG?raw=true" />
