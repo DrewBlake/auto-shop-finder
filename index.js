@@ -6,6 +6,8 @@ let myLong;
 let weatherLat;
 let weatherLong;
 
+//This function initializes a google map
+
 function initMap() {
   let local = {lat: 33.608, lng: -84.361};
   map = new google.maps.Map(document.getElementById('map'), {
@@ -29,8 +31,8 @@ function updateMapInfo() {
   service.textSearch(request, displayMarkers);
 }
 
-//This function updates the map using GPS coordinates obtained from 
-//weather API.  When the user inputs a city or zip code 
+//This function updates the map using GPS coordinates obtained from the
+//weather API based on the city or zip code entered. 
 
 function updateMapInfoCity() {
   map.setCenter({lat: weatherLat, lng: weatherLong});
@@ -43,6 +45,9 @@ function updateMapInfoCity() {
   service = new google.maps.places.PlacesService(map);
   service.textSearch(request, displayMarkers);
 }
+
+//This function displays markers on the map for shop locations in 
+//the area.  It also displays the list of shops underneath the map.
 
 function displayMarkers(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -69,6 +74,9 @@ function createMarker(place) {
     infowindow.open(map, this);
   });
 }
+
+//This function obtains weather data based either on user city or zip code
+//input or Lat and Long obtained from geolocation API.
 
 function getDataFromWeatherApi(lat1, long1, userInput, callback) {
   const query = {
