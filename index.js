@@ -222,6 +222,7 @@ function handleBackButtonClick() {
 
 function hideElementsOnStartup() {
   $(".js-waiting-icon").show();
+  $(".js-list-items").hide();
   $(".js-scroll").hide();
   $(".js-fail-button").hide();
   $(".js-back").hide();

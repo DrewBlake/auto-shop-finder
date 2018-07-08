@@ -62,10 +62,6 @@ button:hover {
 	text-align: center;
 }
 
-.js-list-items {
-	margin-top: 60px;
-}
-
 .error, #failure {
 	position: fixed;
 	bottom: 400px;
@@ -117,16 +113,25 @@ html, body {
   /*background-color: rgba(236, 246, 248, 0.8);*/
 }
 
+.js-list-items {
+	margin: 90px auto;
+	background-color: rgb(236, 246, 248);
+	border: 1px solid rgb(183, 26, 5);
+	width: 80%;
+	border-radius: 6px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
 .list-item {
 	font-weight: 600;
-	border: 1px solid rgb(183, 26, 5);
+	border: 2px solid rgb(183, 26, 5);
 	margin: 15px 0;
-	margin-right: 30px;
+	margin-right: 40px;
 	padding: 5px;
 	text-align: center;
 	list-style: none;
 	border-radius: 5px;
-	background-color: rgb(236, 246, 248);
 }
 
 .shop-info {
@@ -210,6 +215,12 @@ html, body {
   #copyright {
   	top: 620px;
   }
+
+  .js-list-items {
+  	margin-top: 90px;
+
+  }
+}
 
 @media only screen and (min-width: 900px) {
 	h1 {
