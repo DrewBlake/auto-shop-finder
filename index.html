@@ -16,19 +16,18 @@
             <p>Search for automotive repair shops in your area, or any selected area.</p>
             <button type="submit" class="js-location-near-me">Search close to your location</button>
             <button type="submit" class="js-location-anywhere anywhere-button">Search any location</button>
-            <div id="userForm"></div>
+            <div id="userForm" aria-live="assertive"></div>
           </section>
         </div>
-
       </div>
       <p id="copyright">Copyright Andrew Blake 2018</p>
-      <div id="map"></div>
-      <div class="js-weather-list"></div>
+      <div id="map" aria-live="assertive"></div>
+      <div class="js-weather-list" aria-live="assertive"></div>
       <div class="shop-info"><h2 class="js-scroll" id="scroll">Scroll Down For Shop List</h2>
-        <ul class="js-list-items"></ul>
+        <ul class="js-list-items" aria-live="assertive"></ul>
       </div>
-      <div class="js-error error"></div>
-      <div id="failure"></div>
+      <div class="js-error error" aria-live="assertive"></div>
+      <div id="failure" aria-live="assertive"></div>
       <div class="try-again">
         <button class="js-fail-button fail-button">Try Again</button>
       </div>
