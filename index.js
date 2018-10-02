@@ -103,7 +103,7 @@ function displayWeatherData(data) {
   if ((data.cod === "200") && (data.count > 0)) {
     console.log(data.cod);
     console.log(data.count);
-    const results = [`<div class="weather-info">${data.list[0].main.temp} degrees F and ${data.list[0].main.humidity}% humidity</div>`];
+    const results = `<div class="weather-info">${data.list[0].main.temp} degrees F and ${data.list[0].main.humidity}% humidity</div>`;
     weatherLong = data.list[0].coord.lon;
     weatherLat = data.list[0].coord.lat;
     updateMapInfoCity();
